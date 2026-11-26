@@ -1,0 +1,20 @@
+```text
+# Entorno virtual de Python
+venv/
+__pycache__/
+*.pyc
+
+# Base de datos de Docker (no queremos subir los datos binarios)
+db_data/
+
+# Grabaciones de llamadas (suelen ser pesadas)
+static/recordings/
+config/recordings/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de Fail2ban (creados por Docker/root)
+config/fail2ban/
+*.sqlite3

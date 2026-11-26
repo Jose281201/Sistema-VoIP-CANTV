@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  asterisk:
+    image: andrius/asterisk:stable
+    container_name: asterisk_cantv
+    network_mode: host
+    volumes:
+      - ./config:/etc/asterisk
+      - ./config/modules.conf:/etc/asterisk/modules.conf
+      - ./config/odbc.ini:/etc/odbc.ini
+      - ./config/odbcinst.ini:/etc/odbcinst.ini
+      - ./sounds:/var/lib/asterisk/sounds/es/custom
+      # Carpeta para que Fail2ban pueda leer los logs de seguridad
+      - ./logs/asterisk:/var/log/asterisk 
+    restart: unless-stopped
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.11
+    container_name: asterisk_db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cantv_db
+      MYSQL_USER: cantv_user
+      MYSQL_PASSWORD: cantv_pass
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
