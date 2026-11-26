@@ -25,5 +25,5 @@ Prototipo funcional de una central telefónica (PBX) basado en Asterisk, con un 
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
-cd TU_REPOSITORIO
+git clone https://github.com/Jose281201/Sistema-VoIP-CANTV.git
+cd Sistema-VoIP-CANTV
